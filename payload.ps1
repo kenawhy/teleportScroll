@@ -22,7 +22,7 @@ if (-not (Get-Command -Name "Write-S3Object" -ErrorAction SilentlyContinue)) {
 
 # Upload the file to S3
 try {
-    Write-S3Object -BucketName $bucketName -Key $s3Key -File $infoFilePath -Region "ap-southeast-1"
+    Write-S3Object -BucketName $bucketName -Key $s3Key -File $infoFilePath -Region "ap-southeast-2"
     Write-Output "File uploaded successfully to S3: $bucketName/$s3Key"
 } catch {
     Write-Output "Failed to upload file to S3. Error: $_"
