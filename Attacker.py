@@ -4,6 +4,10 @@ import socket
 # Getting our local IP and a specified port
 HOST = '127.0.0.1' # '192.168.43.82'
 PORT = 8081 # 2222
+FORMAT = 'utf-8'
+
+if HOST == '127.0.0.1':
+    print(f"[!] Don't forget to change default HOST:{HOST} to your HOST:{socket.gethostbyname(socket.gethostname())} in both server and client")
 
 new_port = input('Input Host Port (Blank if default).')
 if (new_port != "\n"):
